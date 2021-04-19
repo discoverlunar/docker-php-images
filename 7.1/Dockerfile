@@ -25,7 +25,7 @@ RUN sed -i 's|#LoadModule proxy_module modules/mod_proxy.so|LoadModule proxy_mod
 RUN sed -i 's|#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so|LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so|g' /etc/apache2/httpd.conf
 RUN sed -i 's|#LoadModule vhost_alias_module modules/mod_vhost_alias.so|LoadModule vhost_alias_module modules/mod_vhost_alias.so|g' /etc/apache2/httpd.conf
 RUN sed -i 's|#LoadModule mime_module modules/mod_mime.so|LoadModule mime_module modules/mod_mime.so|g' /etc/apache2/httpd.conf
-RUN ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+RUN mkdir -p /etc/apache2/sites-enabled && ln -sfn /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Install composer
 RUN apk add composer wget curl
