@@ -1,6 +1,7 @@
-httpd:
-  build: .
-  ports:
-    - "8080:80"
-  volumes:
-    - ./:/var/www:delegated
+services:
+  httpd:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www:delegated

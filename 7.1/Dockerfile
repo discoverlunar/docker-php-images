@@ -1,5 +1,8 @@
 FROM php:7.1-fpm-alpine
 
+ARG HOST_NAME
+ARG DOCUMENT_ROOT
+
 # Update and upgrade APK repositories
 RUN apk update && apk upgrade
 
@@ -13,6 +16,9 @@ RUN apk add apache2 apache2-proxy
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|ServerName HOST_NAME|ServerName $HOST_NAME|g" /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|DocumentRoot DOCUMENT_ROOT|DocumentRoot $DOCUMENT_ROOT|g" /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's|Listen 80|Listen 8080|g' /etc/apache2/httpd.conf
 RUN sed -i 's|DirectoryIndex index.html|DirectoryIndex index.php index.html|g' /etc/apache2/httpd.conf
 RUN sed -i 's|^DocumentRoot|<FilesMatch "\.php$">\n\
     SetHandler "proxy:unix:/var/run/php-fpm7.sock\|fcgi://localhost"\n\
