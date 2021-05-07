@@ -1,9 +1,9 @@
 FROM php:7.1-fpm-alpine
 
-ARG HOST_NAME
-ARG DOCUMENT_ROOT
-ENV HOST_NAME=${HOST_NAME}
-ENV DOCUMENT_ROOT=${DOCUMENT_ROOT}
+ARG LUNAR_HOST_NAME
+ARG LUNAR_DOCUMENT_ROOT
+ENV LUNAR_HOST_NAME=${LUNAR_HOST_NAME}
+ENV LUNAR_DOCUMENT_ROOT=${LUNAR_DOCUMENT_ROOT}
 
 # Update and upgrade APK repositories
 RUN apk update && apk upgrade
@@ -18,8 +18,9 @@ RUN apk add apache2 apache2-proxy
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
-RUN sed -i "s|ServerName HOST_NAME|ServerName ${HOST_NAME}|g" /etc/apache2/sites-available/000-default.conf
-RUN sed -i "s|DocumentRoot DOCUMENT_ROOT|DocumentRoot ${DOCUMENT_ROOT}|g" /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|ServerName HOST_NAME|ServerName ${LUNAR_HOST_NAME}|g" /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|DocumentRoot DOCUMENT_ROOT|DocumentRoot ${LUNAR_DOCUMENT_ROOT}|g" /etc/apache2/sites-available/000-default.conf
+RUN sed -i "s|<Directory \"DOCUMENT_ROOT\">|<Directory \"${LUNAR_DOCUMENT_ROOT}\">|g" /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's|Listen 80|Listen 8080|g' /etc/apache2/httpd.conf
 RUN sed -i 's|DirectoryIndex index.html|DirectoryIndex index.php index.html|g' /etc/apache2/httpd.conf
 RUN sed -i 's|^DocumentRoot|<FilesMatch "\.php$">\n\
@@ -34,7 +35,7 @@ RUN sed -i 's|#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so|LoadModule
 RUN sed -i 's|#LoadModule vhost_alias_module modules/mod_vhost_alias.so|LoadModule vhost_alias_module modules/mod_vhost_alias.so|g' /etc/apache2/httpd.conf
 RUN sed -i 's|#LoadModule mime_module modules/mod_mime.so|LoadModule mime_module modules/mod_mime.so|g' /etc/apache2/httpd.conf
 RUN mkdir -p /etc/apache2/sites-enabled && ln -sfn /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-
+RUN rmdir /var/www/html
 # Install composer
 RUN apk add composer wget curl
 
@@ -54,5 +55,5 @@ RUN docker-php-ext-enable imagick
 RUN apk del --purg .build-deps
 
 # Finish setup
-RUN chown -R www-data:www-data /var/www/html
-WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www
+WORKDIR /var/www
