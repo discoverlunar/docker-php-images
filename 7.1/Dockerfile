@@ -13,7 +13,6 @@ RUN apk add apache2 apache2-proxy
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
-RUN sed -i 's|Listen 80|Listen 8080|g' /etc/apache2/httpd.conf
 RUN sed -i 's|DirectoryIndex index.html|DirectoryIndex index.php index.html|g' /etc/apache2/httpd.conf
 RUN sed -i 's|^DocumentRoot|<FilesMatch "\.php$">\n\
     SetHandler "proxy:unix:/var/run/php-fpm7.sock\|fcgi://localhost"\n\
