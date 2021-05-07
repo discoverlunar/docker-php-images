@@ -1,11 +1,6 @@
 # Always define these in your docker-compose.yml
 services:
   httpd:
-    build:
-      context: .
-      args:
-        - LUNAR_HOST_NAME=yourhostname.here
-        - LUNAR_DOCUMENT_ROOT=/path/to/document/root
     ports:
       - "8080:80"
     volumes:
