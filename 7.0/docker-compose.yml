@@ -1,0 +1,10 @@
+# Always define these in your docker-compose.yml
+services:
+  httpd:
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www:delegated
+    environment:
+      - VIRTUAL_PORT=80
+      - VIRTUAL_HOST=yourhostname.here

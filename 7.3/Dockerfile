@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.3-apache
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
