@@ -9,9 +9,9 @@ RUN apt-get update && apt-get install -y curl libmcrypt-dev imagemagick libmagic
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install extensions
-RUN pecl install imagick
-RUN docker-php-ext-install gd pdo pdo_mysql mysqli mcrypt
-RUN docker-php-ext-enable imagick
+RUN pecl install imagick mcrypt
+RUN docker-php-ext-install gd pdo pdo_mysql mysqli
+RUN docker-php-ext-enable imagick mcrypt
 
 # Finish setup
 RUN chown -R www-data:www-data /var/www/html
