@@ -10,7 +10,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install extensions
 RUN pecl install imagick
-RUN docker-php-ext-install gd pdo pdo_mysql mysqli mcrypt
+RUN docker-php-ext-install gd pdo pdo_mysql mysqli mcrypt zip bcmath
 RUN docker-php-ext-enable imagick
 
 # Finish setup
