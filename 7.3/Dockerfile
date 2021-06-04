@@ -2,6 +2,8 @@ FROM php:7.3-apache
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY ./php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
+
 RUN a2enmod rewrite headers deflate expires mime
 RUN a2ensite 000-default
 
@@ -10,7 +12,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install extensions
 RUN pecl install imagick mcrypt
-RUN docker-php-ext-install gd pdo pdo_mysql mysqli zip bcmath
+RUN docker-php-ext-install gd pdo pdo_mysql mysqli zip bcmath intl
 RUN docker-php-ext-enable imagick mcrypt
 
 # Finish setup
