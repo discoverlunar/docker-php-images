@@ -2,6 +2,8 @@ FROM php:7.0-apache
 
 # Configure Apache
 COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY ./php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
+
 RUN a2enmod rewrite headers deflate expires mime
 RUN a2ensite 000-default
 
