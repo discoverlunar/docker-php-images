@@ -7,12 +7,12 @@ COPY ./php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
 RUN a2enmod rewrite headers deflate expires mime
 RUN a2ensite 000-default
 
-RUN apt-get update && apt-get install -y curl libmcrypt-dev imagemagick libmagickwand-dev libzip-dev
+RUN apt-get update && apt-get install -y curl libmcrypt-dev imagemagick libmagickwand-dev libzip-dev libgmp-dev
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install extensions
 RUN pecl install imagick mcrypt
-RUN docker-php-ext-install gd pdo pdo_mysql mysqli zip bcmath intl
+RUN docker-php-ext-install gd pdo pdo_mysql mysqli zip bcmath intl gmp
 RUN docker-php-ext-enable imagick mcrypt
 
 # Finish setup
