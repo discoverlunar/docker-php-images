@@ -13,7 +13,7 @@ RUN a2ensite 000-default
 
 # Install composer and php extensions (including system dependencies)
 RUN install-php-extensions @composer
-RUN install-php-extensions bcmath gd gmp imagick intl mcrypt mysqli pdo pdo_mysql zip
+RUN install-php-extensions bcmath gd gmp imagick intl mcrypt mysqli pdo pdo_mysql soap zip
 
 # Finish setup
 RUN chown -R www-data:www-data /var/www/html

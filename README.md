@@ -25,7 +25,8 @@ Each image has the core extensions available and/or enabled, and additionally ha
 - `mcrypt` 
 - `mysqli` 
 - `pdo` 
-- `pdo_mysql` 
+- `pdo_mysql`
+- `soap`
 - `zip`
 
 Additionally, composer will be installed for you as well.
