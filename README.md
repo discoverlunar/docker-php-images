@@ -6,7 +6,7 @@ PHP images on Docker hub. To use a specific version when setting up your docker-
 when specifying the image name.
 
 ## Available tags
-Currently the following tags are available (latest being equal to 8.0):
+Currently the following tags are available (latest being equal to 8.1):
 - `lunarbe/php:5.6`
 - `lunarbe/php:7.0`
 - `lunarbe/php:7.1`
@@ -14,7 +14,10 @@ Currently the following tags are available (latest being equal to 8.0):
 - `lunarbe/php:7.3`
 - `lunarbe/php:7.4`
 - `lunarbe/php:8.0`
+- `lunarbe/php:8.1`
 - `lunarbe/php:latest`
+
+In the nearby future, we will start offering PHP-FPM images as well, for now all of the above are based on mod-php in Apache.
 
 Each image has the core extensions available and/or enabled, and additionally has the following non-core extensions enabled:
 - `bcmath` 
@@ -27,6 +30,7 @@ Each image has the core extensions available and/or enabled, and additionally ha
 - `pdo` 
 - `pdo_mysql`
 - `soap`
+- `sockets`
 - `zip`
 
 Additionally, composer will be installed for you as well.
