@@ -7,9 +7,13 @@ when specifying the image name.
 
 ## Available tags
 Currently the following tags are available (latest being equal to 8.1):
+
+### Legacy
 - `lunarbe/php:5.6`
 - `lunarbe/php:7.0`
 - `lunarbe/php:7.1`
+
+### Actively maintained
 - `lunarbe/php:7.2`
 - `lunarbe/php:7.3`
 - `lunarbe/php:7.4`
