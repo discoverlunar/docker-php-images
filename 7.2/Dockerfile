@@ -12,7 +12,7 @@ COPY ./php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
 RUN a2enmod rewrite headers deflate expires mime && a2ensite 000-default
 
 # Install composer and php extensions (including system dependencies)
-RUN install-php-extensions @composer && install-php-extensions bcmath gd gmp imagick intl mcrypt mysqli pdo pdo_mysql soap sockets zip
+RUN install-php-extensions @composer && install-php-extensions bcmath exif gd gmp imagick intl mcrypt mysqli pdo pdo_mysql soap sockets zip
 
 # Finish setup
 RUN chown -R www-data:www-data /var/www/html
